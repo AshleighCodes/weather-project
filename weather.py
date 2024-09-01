@@ -24,10 +24,12 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    # Parse the ISO string into a datetime object
+    
+    # The fromisoformat method in Python changes a date and time string (like “2023-09-01T10:30:00”)
+    # into a datetime object that Python can work with. This string follows a standard format called ISO 8601.
     date_obj = datetime.fromisoformat(iso_string.replace("Z", "+00:00"))
 
-    # Define the desired format
+    # Format the date into a readable string (e.g., "Monday 01 September 2023")
     return date_obj.strftime("%A %d %B %Y")
 
 
@@ -39,14 +41,14 @@ def convert_f_to_c(temp_in_fahrenheit):
     Returns:
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
-    # Handle case where input is a string
+    # If the temperature is given as a text string, convert it to a number
     if isinstance(temp_in_fahrenheit, str):
         temp_in_fahrenheit = float(temp_in_fahrenheit)
     
-    # Convert Fahrenheit to Celsius
+    # Change the temperature from Fahrenheit to Celsius
     temp_in_celsius = (temp_in_fahrenheit - 32) * 5 / 9
     
-    # Round to 1 decimal place
+    # Round the Celsius temperature to one decimal place
     return round(temp_in_celsius, 1)
 
 
@@ -58,10 +60,10 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    # Convert all elements to float
+    # Change each item in the weather data list to a decimal number
     float_data = [float(item) for item in weather_data]
     
-    # Calculate the mean
+    # Find the average by adding all the numbers together and dividing by how many there are
     mean_value = sum(float_data) / len(float_data)
     
     return mean_value
@@ -76,17 +78,17 @@ def load_data_from_csv(csv_file):
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
 
-    data = []
+    data = [] # Create an empty list to store the weather data
 
     with open(csv_file, mode='r') as file:
         reader = csv.reader(file)
-        next(reader)  # Skip the header row
+        next(reader)  # Skip the first row since it usually contains headers like "Date", "Min Temp", "Max Temp"
         for row in reader:
-            if row:  # Ensure the row is not empty
-                date_str = row[0]
-                temp_min = int(row[1])
-                temp_max = int(row[2])
-                data.append([date_str, temp_min, temp_max])
+            if row:  # Only process the row if it has data
+                date_str = row[0] # Get the date from the first column
+                temp_min = int(row[1]) # Get the minimum temperature from the second column and convert it to a number
+                temp_max = int(row[2]) # Get the maximum temperature from the third column and convert it to a number
+                data.append([date_str, temp_min, temp_max]) # Add the date, min temp, and max temp to our data list
 
     return data
 
@@ -99,16 +101,16 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    if not weather_data:  # Handle the empty list case
+    if not weather_data:  # Check if the list is empty
         return ()
     
-    # Convert all elements to floats
+    # Change all items to decimal numbers
     float_data = [float(item) for item in weather_data]
     
-    # Find the minimum value
+    # Get the smallest number
     min_value = min(float_data)
     
-    # Find the index of the last occurrence of the minimum value
+    # Find where the last smallest number appears in the list
     min_index = len(float_data) - 1 - float_data[::-1].index(min_value)
     
     return (min_value, min_index)
@@ -122,16 +124,16 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    if not weather_data:  # Handle the empty list case
+    if not weather_data:  # Check if the list is empty
         return ()
     
-    # Convert all elements to floats
+    # Convert all items to decimal numbers
     float_data = [float(item) for item in weather_data]
     
-    # Find the maximum value
+    # Get the largest number
     max_value = max(float_data)
     
-    # Find the index of the last occurrence of the maximum value
+    # Find where the last largest number appears in the list
     max_index = len(float_data) - 1 - float_data[::-1].index(max_value)
     
     return (max_value, max_index)
