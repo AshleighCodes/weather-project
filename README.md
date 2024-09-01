@@ -7,6 +7,10 @@
 - [x] Verify that everything works as intended by running the tests with `python3 run_tests.py` (Mac users), or `python3 run_tests.py` (PC users).
 
 
+## PASSING TESTS
+![Python Weather Tests Passing](./README_img/Python-demo.gif)
+
+
 ## CHALLENGES
 As a beginner, I found it challenging to understand and handle error messages in Python, and how to start when completing each question. Figuring out what the errors meant and how to fix them took some time, but it was a valuable learning experience that helped me become more comfortable with debugging my code.
 
