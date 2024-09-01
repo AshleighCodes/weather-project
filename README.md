@@ -1,4 +1,5 @@
-# Plus Resources: Weather Project Template
+# Plus Resources: Weather Project
+![Static Badge](https://img.shields.io/badge/Python%20Tests-Passing-greeb)
 
 Starter code for the Plus Weather project.
 
